@@ -1,1 +1,17 @@
 version: 2.1
+
+workflows:
+  docker-success:
+      jobs:
+        - docker-aws-auth-oidc
+           
+jobs:
+  docker-aws-auth-oidc:
+    docker:
+      - image: 015176527992.dkr.ecr.us-east-1.amazonaws.com/test-sagar
+        aws_auth:
+          oidc_role_arn: arn:aws:iam::015176527992:role/circleci-oidc-ecr-pull
+    steps:
+    - run: hostname
+    - run: uname -a
+    - run: env
