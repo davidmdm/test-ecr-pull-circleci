@@ -2,18 +2,16 @@ version: 2.1
 
 workflows:
   docker-success:
-      jobs:
-        - docker-aws-auth-oidc
-           
+    jobs:
+      - docker-aws-auth-oidc
+
 jobs:
   docker-aws-auth-oidc:
     docker:
       - image: 015176527992.dkr.ecr.us-east-1.amazonaws.com/test-sagar:latest
         aws_auth:
           oidc_role_arn: arn:aws:iam::015176527992:role/circleci-oidc-ecr-pull
-#          aws_access_key_id: $ECR_AWS_ACCESS_KEY_ID
-#          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY
     steps:
-    - run: hostname
-    - run: uname -a
-    - run: env
+      - run: hostname
+      - run: uname -a
+      - run: env
